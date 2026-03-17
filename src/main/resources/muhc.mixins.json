@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.sch246.muhc.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "muhc.refmap.json",
+  "plugin": "com.sch246.muhc.mixin.MixinPlugin",
+  "mixins": [
+    "HandCrankBlockEntityMixin",
+    "ItemFrameItemMixin",
+    "ItemFrameMixin",
+    "KineticBlockEntityMixin",
+    "accessor.KineticBlockEntityAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

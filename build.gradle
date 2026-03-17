@@ -1,0 +1,186 @@
+plugins {
+    id 'fabric-loom' version '1.15-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+fabricApi {
+    configureDataGeneration {
+        client = true
+    }
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/tlmo_additions.accesswidener")
+    mixin {
+        defaultRefmapName = "tlmo_additions.refmap.json"
+    }
+    runs {
+        datagen {
+            property "fabric-api.datagen.modid", "tlmo_additions"
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dir "libs"
+    }
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
+    maven {
+        url "https://cursemaven.com"
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
+        // location of the maven that hosts JEI files before January 2023
+        name = "Progwml6's maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+    maven {
+        name "KosmX's maven"
+        url 'https://maven.kosmx.dev/'
+    }
+    maven {
+        name = "IPN-Releases"
+        mavenContent {
+            releasesOnly()
+        }
+        content {
+            includeGroup("org.anti_ad.mc")
+            includeGroup("ca.solo-studios")
+        }
+        url = uri("https://maven.ipn-mod.org/releases")
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven { url = "https://maven.createmod.net" }
+    maven { url = "https://maven.architectury.dev/" }
+    maven { url = "https://maven.latvian.dev/releases" }
+    maven {
+        url = "https://raw.github.com/Sh1roCu/Sh1roCu_MCRepo/master/repository"
+    }
+    maven { url = "https://mvn.devos.one/snapshots/" }
+    maven { url = "https://mvn.devos.one/releases/" }
+    maven {
+        name = "Ladysnake Mods"
+        url = 'https://maven.ladysnake.org/releases'
+    }
+    maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+    }
+    maven {
+        url "https://maven.jamieswhiteshirt.com/libs-release"
+        content {
+            includeGroup "com.jamieswhiteshirt"
+        }
+    }
+    maven {
+        name = "Greenhouse Maven"
+        url = 'https://maven.greenhouse.lgbt/releases/'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_mappings_version}@zip")
+    }
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    modImplementation("cn.sh1rocu:touhoulittlemaid-fabric-1.20.1:0.6.4-forge1.5.0") {
+        exclude(group: "libs")
+        exclude(group: "net.conczin")
+    }
+    modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:$project.cca_version"
+
+    modImplementation "curse.maven:explorers-compass-491794:4712192"
+    modImplementation "curse.maven:natures-compass-252848:4712188"
+
+    modImplementation("com.terraformersmc:modmenu:7.2.2")
+
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+
+    modImplementation "com.simibubi.create:create-fabric:6.0.8.1+build.1744-mc1.20.1"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "loader_version", project.loader_version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version,
+                "minecraft_version": project.minecraft_version,
+                "loader_version": project.loader_version
+    }
+}
+
+def targetJavaVersion = 17
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release.set(targetJavaVersion)
+    }
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archives_base_name}" }
+    }
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            artifactId = project.archives_base_name
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url "file:///D:/github_maven/Sh1roCu_MCRepo/repository"
+        }
+    }
+}

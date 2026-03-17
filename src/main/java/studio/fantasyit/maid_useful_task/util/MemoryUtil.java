@@ -1,0 +1,127 @@
+package studio.fantasyit.maid_useful_task.util;
+
+import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
+import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
+import net.minecraft.world.entity.ai.behavior.EntityTracker;
+import net.minecraft.world.entity.ai.behavior.PositionTracker;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
+import studio.fantasyit.maid_useful_task.memory.BlockTargetMemory;
+import studio.fantasyit.maid_useful_task.memory.BlockUpContext;
+import studio.fantasyit.maid_useful_task.memory.BlockValidationMemory;
+import studio.fantasyit.maid_useful_task.memory.CurrentWork;
+import studio.fantasyit.maid_useful_task.registry.MemoryModuleRegistry;
+import studio.fantasyit.maid_useful_task.vehicle.MaidVehicleControlType;
+
+import java.util.List;
+import java.util.Optional;
+
+public class MemoryUtil {
+    public static @Nullable BlockTargetMemory getDestroyTargetMemory(EntityMaid maid) {
+        Optional<BlockTargetMemory> memory = maid.getBrain().getMemory(MemoryModuleRegistry.DESTROY_TARGET);
+        return memory.orElse(null);
+    }
+
+    public static void setDestroyTargetMemory(EntityMaid maid, List<BlockPos> blockPosSet) {
+        maid.getBrain().setMemory(MemoryModuleRegistry.DESTROY_TARGET, new BlockTargetMemory(blockPosSet));
+    }
+
+    public static void clearDestroyTargetMemory(EntityMaid maid) {
+        maid.getBrain().eraseMemory(MemoryModuleRegistry.DESTROY_TARGET);
+    }
+
+    public static void clearTarget(EntityMaid maid) {
+        maid.getBrain().eraseMemory(InitEntities.TARGET_POS);
+        maid.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+    }
+
+    public static @Nullable BlockPos getTargetPos(EntityMaid maid) {
+        Optional<PositionTracker> memory = maid.getBrain().getMemory(InitEntities.TARGET_POS);
+        return memory.map(PositionTracker::currentBlockPosition).orElse(null);
+    }
+
+    public static @Nullable BlockPos getPlaceTarget(EntityMaid maid) {
+        Optional<BlockPos> memory = maid.getBrain().getMemory(MemoryModuleRegistry.PLACE_TARGET);
+        return memory.orElse(null);
+    }
+
+    public static void setPlaceTarget(EntityMaid maid, BlockPos blockPos) {
+        maid.getBrain().setMemory(MemoryModuleRegistry.PLACE_TARGET, blockPos);
+    }
+
+    public static void clearPlaceTarget(EntityMaid maid) {
+        maid.getBrain().eraseMemory(MemoryModuleRegistry.PLACE_TARGET);
+    }
+
+    public static void setLookAt(EntityMaid maid, BlockPos pos) {
+        maid.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(pos));
+    }
+
+    public static BlockUpContext getBlockUpContext(EntityMaid maid) {
+        Brain<EntityMaid> brain = maid.getBrain();
+        if (!brain.hasMemoryValue(MemoryModuleRegistry.BLOCK_UP_TARGET)) {
+            brain.setMemory(MemoryModuleRegistry.BLOCK_UP_TARGET, new BlockUpContext());
+        }
+        return brain.getMemory(MemoryModuleRegistry.BLOCK_UP_TARGET).get();
+    }
+
+    public static BlockValidationMemory getBlockValidationMemory(EntityMaid maid) {
+        Brain<EntityMaid> brain = maid.getBrain();
+        if (!brain.hasMemoryValue(MemoryModuleRegistry.BLOCK_VALIDATION)) {
+            brain.setMemory(MemoryModuleRegistry.BLOCK_VALIDATION, new BlockValidationMemory());
+        }
+        return brain.getMemory(MemoryModuleRegistry.BLOCK_VALIDATION).get();
+    }
+
+    public static void setTargetEntity(EntityMaid maid, Entity target, float speed) {
+        maid.getBrain().setMemory(InitEntities.TARGET_POS, new EntityTracker(target, false));
+        BehaviorUtils.setWalkAndLookTargetMemories(maid, target, speed, 0);
+    }
+
+    public static void setTarget(EntityMaid maid, BlockPos targetPos, float speed) {
+        maid.getBrain().setMemory(InitEntities.TARGET_POS, new BlockPosTracker(targetPos));
+        BehaviorUtils.setWalkAndLookTargetMemories(maid, targetPos, speed, 0);
+    }
+
+    public static CurrentWork getCurrent(EntityMaid maid) {
+        return maid.getBrain().getMemory(MemoryModuleRegistry.CURRENT_WORK).orElse(CurrentWork.IDLE);
+    }
+
+    public static void setCurrent(EntityMaid maid, CurrentWork currentWork) {
+        maid.getBrain().setMemory(MemoryModuleRegistry.CURRENT_WORK, currentWork);
+    }
+
+    public static void setCommonBlockCache(EntityMaid maid, BlockPos pos) {
+        maid.getBrain().setMemory(MemoryModuleRegistry.COMMON_BLOCK_CACHE, pos);
+    }
+
+    public static BlockPos getCommonBlockCache(EntityMaid maid) {
+        return maid.getBrain().getMemory(MemoryModuleRegistry.COMMON_BLOCK_CACHE).orElse(null);
+    }
+
+    public static void setAllowHandleVehicle(EntityMaid maid, MaidVehicleControlType allow) {
+        maid.getBrain().setMemory(MemoryModuleRegistry.IS_ALLOW_HANDLE_VEHICLE, allow);
+    }
+
+    public static MaidVehicleControlType getAllowHandleVehicle(EntityMaid maid) {
+        return maid.getBrain().getMemory(MemoryModuleRegistry.IS_ALLOW_HANDLE_VEHICLE).orElse(MaidVehicleControlType.NONE);
+    }
+
+    public static void clearCommonBlockCache(EntityMaid maid) {
+        maid.getBrain().eraseMemory(MemoryModuleRegistry.COMMON_BLOCK_CACHE);
+    }
+
+    public static void setLocateItem(EntityMaid maid, ItemStack item) {
+        maid.getBrain().setMemory(MemoryModuleRegistry.LOCATE_ITEM, item);
+    }
+
+    public static ItemStack getLocateItem(EntityMaid maid) {
+        return maid.getBrain().getMemory(MemoryModuleRegistry.LOCATE_ITEM).orElse(ItemStack.EMPTY);
+    }
+}
