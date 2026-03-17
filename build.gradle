@@ -92,10 +92,6 @@ repositories {
         url = 'https://maven.ladysnake.org/releases'
     }
     maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
-    }
-    maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content {
             includeGroup "com.jamieswhiteshirt"
@@ -104,6 +100,9 @@ repositories {
     maven {
         name = "Greenhouse Maven"
         url = 'https://maven.greenhouse.lgbt/releases/'
+    }
+    maven {
+        url "https://alexiil.uk/mirrors/server.bbkr.space/maven/"
     }
 }
 
