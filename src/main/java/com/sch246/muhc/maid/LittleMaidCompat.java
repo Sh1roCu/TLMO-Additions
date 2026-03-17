@@ -26,6 +26,8 @@ public class LittleMaidCompat implements ILittleMaid {
      */
     @Override
     public void addMaidTask(TaskManager manager) {
+        if (!FabricLoader.getInstance().isModLoaded("create"))
+            return;
         // 添加自定义任务
         manager.add(new HandCrankTask());
     }
