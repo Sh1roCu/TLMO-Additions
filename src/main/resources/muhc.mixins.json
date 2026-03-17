@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.sch246.muhc.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "muhc.refmap.json",
+  "refmap": "tlmo_additions.refmap.json",
   "plugin": "com.sch246.muhc.mixin.MixinPlugin",
   "mixins": [
     "HandCrankBlockEntityMixin",

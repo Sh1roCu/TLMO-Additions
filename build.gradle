@@ -102,6 +102,10 @@ repositories {
         url = 'https://maven.greenhouse.lgbt/releases/'
     }
     maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+    }
+    maven {
         url "https://alexiil.uk/mirrors/server.bbkr.space/maven/"
     }
 }
