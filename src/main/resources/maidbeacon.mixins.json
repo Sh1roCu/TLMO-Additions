@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.mastermarisa.maidbeacon.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "tlmo_additions.refmap.json",
+  "mixins": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

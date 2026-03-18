@@ -25,13 +25,15 @@
     ],
     "little_maid_extension": [
       "studio.fantasyit.maid_useful_task.UsefulTaskExtension",
-      "com.sch246.muhc.maid.LittleMaidCompat"
+      "com.sch246.muhc.maid.LittleMaidCompat",
+      "com.mastermarisa.maidbeacon.MaidPlugin"
     ]
   },
   "mixins": [
     "tlmo_additions.mixins.json",
     "maid_useful_task.mixins.json",
-    "muhc.mixins.json"
+    "muhc.mixins.json",
+    "maidbeacon.mixins.json"
   ],
   "accessWidener": "tlmo_additions.accesswidener",
   "depends": {

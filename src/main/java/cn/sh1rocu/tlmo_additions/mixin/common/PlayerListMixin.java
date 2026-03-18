@@ -1,4 +1,4 @@
-package cn.sh1rocu.tlmo_additions.mixin;
+package cn.sh1rocu.tlmo_additions.mixin.common;
 
 import cn.sh1rocu.tlmo_additions.api.event.PlayerLoggedOutEvent;
 import net.minecraft.server.level.ServerPlayer;

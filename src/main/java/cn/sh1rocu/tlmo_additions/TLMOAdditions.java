@@ -1,5 +1,6 @@
 package cn.sh1rocu.tlmo_additions;
 
+import com.mastermarisa.maidbeacon.MaidBeacon;
 import com.sch246.muhc.MaidUseHandCrank;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -15,6 +16,9 @@ public class TLMOAdditions implements ModInitializer {
 
         // MaidUseHandCrack
         if (FabricLoader.getInstance().isModLoaded("create")) MaidUseHandCrank.init();
+
+        // Touhou Little Maid: Beacon
+        MaidBeacon.init();
     }
 
 }

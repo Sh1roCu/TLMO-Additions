@@ -1,9 +1,12 @@
 accessWidener v2 named
 
+accessible method net/minecraft/server/level/ServerLevel getEntities ()Lnet/minecraft/world/level/entity/LevelEntityGetter;
+
 # Maid Useful Task
 accessible method net/minecraft/world/level/BlockGetter traverseBlocks (Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Ljava/lang/Object;Ljava/util/function/BiFunction;Ljava/util/function/Function;)Ljava/lang/Object;
 accessible field net/minecraft/world/entity/player/Player inventory Lnet/minecraft/world/entity/player/Inventory;
 mutable field net/minecraft/world/entity/player/Player inventory Lnet/minecraft/world/entity/player/Inventory;
 accessible method net/minecraft/world/entity/Entity setRot (FF)V
 
-#
+# Touhou Little Maid: Beacon
+accessible method net/minecraft/client/renderer/blockentity/BeaconRenderer renderPart (Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFIIFFFFFFFFFFFF)V
