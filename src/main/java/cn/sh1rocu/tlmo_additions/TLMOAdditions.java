@@ -1,5 +1,6 @@
 package cn.sh1rocu.tlmo_additions;
 
+import com.github.touhoumaidaffection.TouhouMaidAffection;
 import com.mastermarisa.maidbeacon.MaidBeacon;
 import com.sch246.muhc.MaidUseHandCrank;
 import net.fabricmc.api.ModInitializer;
@@ -19,6 +20,9 @@ public class TLMOAdditions implements ModInitializer {
 
         // Touhou Little Maid: Beacon
         MaidBeacon.init();
+
+        // Touhou Maid: Affection
+        TouhouMaidAffection.init();
     }
 
 }

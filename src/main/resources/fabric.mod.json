@@ -33,7 +33,8 @@
     "tlmo_additions.mixins.json",
     "maid_useful_task.mixins.json",
     "muhc.mixins.json",
-    "maidbeacon.mixins.json"
+    "maidbeacon.mixins.json",
+    "touhou_maid_affection.mixins.json"
   ],
   "accessWidener": "tlmo_additions.accesswidener",
   "depends": {
