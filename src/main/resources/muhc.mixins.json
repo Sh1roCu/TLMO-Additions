@@ -9,8 +9,7 @@
     "HandCrankBlockEntityMixin",
     "ItemFrameItemMixin",
     "ItemFrameMixin",
-    "KineticBlockEntityMixin",
-    "accessor.KineticBlockEntityAccessor"
+    "KineticBlockEntityMixin"
   ],
   "client": [
   ],
