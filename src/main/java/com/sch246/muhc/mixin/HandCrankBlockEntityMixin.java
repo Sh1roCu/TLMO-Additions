@@ -8,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,14 +22,22 @@ public abstract class HandCrankBlockEntityMixin extends GeneratingKineticBlockEn
     @Unique
     private int muhc$tick = 0;
 
-    @Shadow(remap = false)
-    public abstract float getGeneratedSpeed();
+    @Unique
+    @Override
+    public float muhc$getStress() {
+        return muhc$stress;
+    }
+
+    @Unique
+    @Override
+    public int muhc$getTick() {
+        return muhc$tick;
+    }
 
     public HandCrankBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    @Override
     @Unique
     public void muhc$setStress(float stress, int tick) {
         muhc$stress = stress;
@@ -38,29 +45,19 @@ public abstract class HandCrankBlockEntityMixin extends GeneratingKineticBlockEn
         this.sendData(); // 发送数据包到客户端
     }
 
-    @Override
-    public float muhc$getStress() {
-        return muhc$stress;
-    }
-
-    @Override
-    public int muhc$getTick() {
-        return muhc$tick;
-    }
-
-    @Inject(method = "write(Lnet/minecraft/nbt/CompoundTag;Z)V", at = @At("TAIL"), remap = false)
+    @Inject(method = "write", at = @At("TAIL"), remap = false)
     private void onWrite(CompoundTag compound, boolean clientPacket, CallbackInfo ci) {
         compound.putFloat("muhc_stress", muhc$stress);
         compound.putInt("muhc_tick", muhc$tick);
     }
 
-    @Inject(method = "read(Lnet/minecraft/nbt/CompoundTag;Z)V", at = @At("TAIL"), remap = false)
+    @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void onRead(CompoundTag compound, boolean clientPacket, CallbackInfo ci) {
         muhc$stress = compound.getFloat("muhc_stress");
         muhc$tick = compound.getInt("muhc_tick");
     }
 
-    @Inject(method = "tick()V", at = @At("TAIL"), remap = false)
+    @Inject(method = "tick", at = @At("TAIL"), remap = false)
     private void onTick(CallbackInfo ci) {
         if (muhc$tick > 0) {
             --muhc$tick;
