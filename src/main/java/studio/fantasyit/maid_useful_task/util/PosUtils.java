@@ -13,6 +13,7 @@ public class PosUtils {
                 level.getBlockState(pos.east()).isAir() &&
                 level.getBlockState(pos.west()).isAir();
     }
+
     static protected boolean isEmptyBlockPos(Level level, BlockPos pos) {
         return level.getBlockState(pos).isAir() || level.getBlockState(pos).getCollisionShape(
                 level,

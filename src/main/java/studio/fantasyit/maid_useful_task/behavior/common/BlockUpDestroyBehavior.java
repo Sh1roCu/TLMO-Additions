@@ -35,8 +35,7 @@ public class BlockUpDestroyBehavior extends Behavior<EntityMaid> {
     protected boolean checkExtraStartConditions(ServerLevel p_22538_, EntityMaid p_22539_) {
         if (!Conditions.isCurrent(p_22539_, CurrentWork.BLOCKUP_DOWN)) return false;
         if (!MemoryUtil.getBlockUpContext(p_22539_).hasTarget()) return false;
-        if (MemoryUtil.getBlockUpContext(p_22539_).getStatus() != BlockUpContext.STATUS.DOWN) return false;
-        return true;
+        return MemoryUtil.getBlockUpContext(p_22539_).getStatus() == BlockUpContext.STATUS.DOWN;
     }
 
     @Override

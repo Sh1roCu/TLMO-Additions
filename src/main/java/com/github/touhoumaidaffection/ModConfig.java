@@ -1,7 +1,6 @@
 package com.github.touhoumaidaffection;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraft.util.Mth;
 
 import java.util.Locale;
 
@@ -77,7 +76,7 @@ public class ModConfig {
 
         builder.comment("Kiss cooldown settings (in ticks, 20 ticks = 1 second)",
                         "Cooldown decreases as the maid's favorability level increases")
-               .push("cooldown");
+                .push("cooldown");
 
         COOLDOWN_LEVEL_0 = builder
                 .comment("Cooldown at favorability level 0 (default: 100 = 5 seconds)")
@@ -98,7 +97,7 @@ public class ModConfig {
         builder.pop();
 
         builder.comment("Favorability gain settings")
-               .push("favorability");
+                .push("favorability");
 
         FAVORABILITY_POINTS = builder
                 .comment("Favorability points gained per kiss (default: 3)")
@@ -106,14 +105,14 @@ public class ModConfig {
 
         FAVORABILITY_COOLDOWN = builder
                 .comment("Favorability gain cooldown in ticks (default: 600 = 30 seconds)",
-                         "This is separate from the interaction cooldown - prevents favorability farming")
+                        "This is separate from the interaction cooldown - prevents favorability farming")
                 .defineInRange("cooldownTicks", 600, 0, 72000);
 
         builder.pop();
 
         builder.comment("Maid's Prayer buff settings",
                         "Triggered by kissing multiple times in a short window")
-               .push("buff");
+                .push("buff");
 
         BUFF_ENABLED = builder
                 .comment("Enable the Maid's Prayer buff (default: true)")
@@ -133,7 +132,7 @@ public class ModConfig {
 
         builder.comment("Regeneration amplifier per favorability level (0 = I, 1 = II, etc.)",
                         "Higher levels can exceed vanilla limits — the power of love knows no bounds")
-               .push("amplifier");
+                .push("amplifier");
 
         BUFF_AMPLIFIER_LEVEL_0 = builder
                 .comment("Amplifier at favorability level 0 (default: 0 = Regen I)")
@@ -155,7 +154,7 @@ public class ModConfig {
         builder.pop();
 
         builder.comment("Particle settings")
-               .push("particles");
+                .push("particles");
 
         PARTICLE_COUNT_MIN = builder
                 .comment("Minimum number of heart particles per kiss (default: 3)")
@@ -262,7 +261,7 @@ public class ModConfig {
 
         builder.comment("FOV zoom effect on kiss",
                         "Creates a smooth 'lean-in' feeling by narrowing the FOV")
-               .push("fov");
+                .push("fov");
 
         FOV_ZOOM_ENABLED = builder
                 .comment("Enable FOV zoom on kiss (default: true)")
@@ -323,7 +322,7 @@ public class ModConfig {
         }
         try {
             @SuppressWarnings("unchecked")
-            Class<E> enumClass = (Class<E>) fallback.getDeclaringClass();
+            Class<E> enumClass = fallback.getDeclaringClass();
             return Enum.valueOf(enumClass, raw.trim().toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException ex) {
             return fallback;

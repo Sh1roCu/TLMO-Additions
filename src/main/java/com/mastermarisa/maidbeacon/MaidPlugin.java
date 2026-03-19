@@ -14,6 +14,7 @@ public class MaidPlugin implements ILittleMaid {
     public void registerTaskData(TaskDataRegister register) {
         ModTaskDataKeys.registerAll(register);
     }
+
     @Override
     public void bindMaidBauble(BaubleManager manager) {
         manager.bind(ModItems.MOBILE_BEACON, new BeaconEffectGeneratorBauble());

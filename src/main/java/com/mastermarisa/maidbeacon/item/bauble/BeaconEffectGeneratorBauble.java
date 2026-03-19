@@ -7,7 +7,6 @@ import com.mastermarisa.maidbeacon.config.Config;
 import com.mastermarisa.maidbeacon.data.EffectAura;
 import com.mastermarisa.maidbeacon.data.MobileBeaconData;
 import com.mastermarisa.maidbeacon.utils.EntityFilter;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;

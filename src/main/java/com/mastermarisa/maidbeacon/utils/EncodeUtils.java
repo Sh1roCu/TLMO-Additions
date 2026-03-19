@@ -21,11 +21,11 @@ public class EncodeUtils {
                 UNITS[num % 10];
     }
 
-    public static <T> String toJson(T obj){
+    public static <T> String toJson(T obj) {
         return GSON.toJson(obj);
     }
 
-    public static <T> T fromJson(String json, Class<? extends T> type){
+    public static <T> T fromJson(String json, Class<? extends T> type) {
         return GSON.fromJson(json, type);
     }
 

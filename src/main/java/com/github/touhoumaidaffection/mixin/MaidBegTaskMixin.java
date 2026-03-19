@@ -4,12 +4,12 @@ import com.github.tartaricacid.touhoulittlemaid.entity.ai.brain.task.MaidBegTask
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Mixin(MaidBegTask.class)
 public class MaidBegTaskMixin {
@@ -23,7 +23,7 @@ public class MaidBegTaskMixin {
         }
 
         boolean offhandMatched = owner.level().getEntitiesOfClass(Player.class, owner.getBoundingBox().inflate(BEG_RANGE),
-                player -> owner.hasLineOfSight(player) && owner.getTemptationItem().test(player.getOffhandItem()))
+                        player -> owner.hasLineOfSight(player) && owner.getTemptationItem().test(player.getOffhandItem()))
                 .stream()
                 .findAny()
                 .isPresent();

@@ -87,6 +87,7 @@ public interface IUniPosOwner {
 
     /**
      * 续租，继续持有锁
+     *
      * @param level 维度
      * @param pos   位置
      */
@@ -96,13 +97,13 @@ public interface IUniPosOwner {
 }
 
 /**
- 管理 IUniPosOwner 系统的单例存储。
- 该类是后台实现，大多数类不应直接使用。
- 在同一维度键（ResourceKey<Level）范围内，确保任意时刻一个 BlockPos 只能被一个对象“拥有”。
- 注意：锁的作用域是维度键级别，因此在服务端同一维度的不同 Level 实例之间共享。
- 缓存以 BlockPos 的 long 值为键，以 IUniPosOwner 的弱值（weak values）为值；
- 当所有者不再被强引用时，条目会自动移除，从而释放锁。
- 该实现面向服务端使用。
+ * 管理 IUniPosOwner 系统的单例存储。
+ * 该类是后台实现，大多数类不应直接使用。
+ * 在同一维度键（ResourceKey<Level）范围内，确保任意时刻一个 BlockPos 只能被一个对象“拥有”。
+ * 注意：锁的作用域是维度键级别，因此在服务端同一维度的不同 Level 实例之间共享。
+ * 缓存以 BlockPos 的 long 值为键，以 IUniPosOwner 的弱值（weak values）为值；
+ * 当所有者不再被强引用时，条目会自动移除，从而释放锁。
+ * 该实现面向服务端使用。
  */
 final class UniPosManager {
 
@@ -119,10 +120,10 @@ final class UniPosManager {
     }
 
     /**
-     获取或创建特定维度键对应的 Cache。
-     Cache 使用 BlockPos 的 long 值作为键，IUniPosOwner 的弱值作为值。
-     按 ResourceKey<Level> 分隔缓存，因此同一维度的不同 Level 实例在服务端共享同一套锁。
-     computeIfAbsent 是原子操作，保证线程安全地获取或创建 Cache。
+     * 获取或创建特定维度键对应的 Cache。
+     * Cache 使用 BlockPos 的 long 值作为键，IUniPosOwner 的弱值作为值。
+     * 按 ResourceKey<Level> 分隔缓存，因此同一维度的不同 Level 实例在服务端共享同一套锁。
+     * computeIfAbsent 是原子操作，保证线程安全地获取或创建 Cache。
      */
     private Cache<Long, IUniPosOwner> getDimensionCache(Level level) {
         // computeIfAbsent 是原子操作，保证线程安全地获取或创建 Cache
@@ -181,6 +182,7 @@ final class UniPosManager {
 
     /**
      * 续租，继续持有锁
+     *
      * @param level 维度
      * @param pos   位置
      * @param owner 对象
@@ -191,7 +193,6 @@ final class UniPosManager {
             // 只有当锁的主人是当前 owner 时，才更新时间
             // put 操作会重置 expireAfterWrite 的计时器
             cache.asMap().computeIfPresent(pos.asLong(), (k, v) -> {
-                if (v == owner) return owner;
                 return v;
             });
         }

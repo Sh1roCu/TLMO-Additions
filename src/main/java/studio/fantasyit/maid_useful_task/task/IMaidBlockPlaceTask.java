@@ -17,9 +17,10 @@ public interface IMaidBlockPlaceTask {
 
     boolean shouldPlacePos(EntityMaid maid, ItemStack itemStack, BlockPos pos);
 
-    default boolean tryPlaceBlock(EntityMaid maid, BlockPos pos){
-        return MaidUtils.placeBlock(maid,pos);
+    default boolean tryPlaceBlock(EntityMaid maid, BlockPos pos) {
+        return MaidUtils.placeBlock(maid, pos);
     }
+
     default @NotNull List<Pair<Integer, BehaviorControl<? super EntityMaid>>> createBrainTasks(@NotNull EntityMaid entityMaid) {
         return List.of(
                 Pair.of(5, new DestoryBlockBehavior()),

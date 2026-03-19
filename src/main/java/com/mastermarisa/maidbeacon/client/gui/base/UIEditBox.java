@@ -2,9 +2,7 @@ package com.mastermarisa.maidbeacon.client.gui.base;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.apache.commons.compress.utils.Lists;
 
 import java.awt.*;
 import java.util.List;
@@ -34,7 +32,7 @@ public class UIEditBox extends UIElement {
         this.editBox.setResponder(responder);
         this.editBox.setTextColor(textColor.getRGB());
 
-        this.bg = new UIBox(new Rectangle(frame.width + 6,frame.height), color);
+        this.bg = new UIBox(new Rectangle(frame.width + 6, frame.height), color);
         this.children = List.of(bg);
     }
 
@@ -51,5 +49,7 @@ public class UIEditBox extends UIElement {
         editBox.setY(getMinY());
     }
 
-    public EditBox getEditBox() { return editBox; }
+    public EditBox getEditBox() {
+        return editBox;
+    }
 }

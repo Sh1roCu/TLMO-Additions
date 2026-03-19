@@ -65,7 +65,7 @@ public class BlockValidationMemory {
     }
 
     public void clearFaraway(BlockPos blockPos, int range) {
-        clearIf(pos->pos.distSqr(blockPos) > range * range);
+        clearIf(pos -> pos.distSqr(blockPos) > range * range);
     }
 
     public void clearIf(Predicate<BlockPos> o) {

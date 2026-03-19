@@ -22,7 +22,7 @@ public class UIBox extends UIElement {
 
     @Override
     protected void render(GuiGraphics graphics, int mouseX, int mouseY) {
-        super.render(graphics,mouseX,mouseY);
+        super.render(graphics, mouseX, mouseY);
         graphics.fill(this.frame.x, this.frame.y, this.frame.x + this.frame.width, this.frame.y + this.frame.height, this.color.getRGB());
     }
 }

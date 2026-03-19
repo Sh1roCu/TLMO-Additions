@@ -12,11 +12,12 @@ abstract public class AbstractMaidControllableVehicle {
 
     abstract public void maidControlVehicle(EntityMaid maid, MaidVehicleControlType type, BlockPos target);
 
-    public void syncVehicleParameter(EntityMaid maid, CompoundTag tag){
-        if(maid.getVehicle() instanceof IVirtualControl vehicle){
+    public void syncVehicleParameter(EntityMaid maid, CompoundTag tag) {
+        if (maid.getVehicle() instanceof IVirtualControl vehicle) {
             vehicle.maid_useful_tasks$setControlParam(tag);
         }
     }
+
     public @Nullable CompoundTag getSyncVehicleParameter(EntityMaid maid) {
         if (maid.getVehicle() instanceof IVirtualControl vehicle) {
             return vehicle.maid_useful_tasks$getControlParam();

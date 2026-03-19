@@ -1,7 +1,6 @@
 package com.mastermarisa.maidbeacon.client.event;
 
 import com.mastermarisa.maidbeacon.client.render.MaidExtraRenderer;
-import com.mastermarisa.maidbeacon.entity.ExtraRenderingEntity;
 import com.mastermarisa.maidbeacon.init.ModEntities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

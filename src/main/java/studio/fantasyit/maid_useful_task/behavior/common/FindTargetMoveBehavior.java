@@ -1,24 +1,17 @@
 package studio.fantasyit.maid_useful_task.behavior.common;
 
-import com.github.tartaricacid.touhoulittlemaid.entity.item.EntityBroom;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.StructureTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
-import studio.fantasyit.maid_useful_task.registry.MemoryModuleRegistry;
 import studio.fantasyit.maid_useful_task.task.IMaidFindTargetTask;
 import studio.fantasyit.maid_useful_task.util.MemoryUtil;
-import studio.fantasyit.maid_useful_task.vehicle.MaidVehicleControlType;
-import studio.fantasyit.maid_useful_task.vehicle.MaidVehicleManager;
 
 public class FindTargetMoveBehavior extends Behavior<EntityMaid> {
 

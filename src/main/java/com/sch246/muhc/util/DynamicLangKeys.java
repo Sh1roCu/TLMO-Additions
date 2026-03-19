@@ -1,9 +1,9 @@
 package com.sch246.muhc.util;
 
 import com.sch246.muhc.MaidUseHandCrank;
-import net.minecraft.locale.Language;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DynamicLangKeys {
     private static volatile String[] CHAT_BUBBLES;

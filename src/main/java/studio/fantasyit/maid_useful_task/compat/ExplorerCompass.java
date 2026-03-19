@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class ExplorerCompass {
     public static BlockPos getCompassTarget(EntityMaid maid, ItemStack itemStack) {
-       if (itemStack.is(ExplorersCompass.EXPLORERS_COMPASS_ITEM)) {
+        if (itemStack.is(ExplorersCompass.EXPLORERS_COMPASS_ITEM)) {
             return new BlockPos(
                     ExplorersCompass.EXPLORERS_COMPASS_ITEM.getFoundStructureX(itemStack),
                     maid.level().getSeaLevel(),

@@ -5,7 +5,6 @@ import com.github.tartaricacid.touhoulittlemaid.client.gui.widget.button.MaidCon
 import com.github.tartaricacid.touhoulittlemaid.inventory.container.task.TaskConfigContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import studio.fantasyit.maid_useful_task.data.MaidLoggingConfig;
 import studio.fantasyit.maid_useful_task.data.MaidReviveConfig;
 import studio.fantasyit.maid_useful_task.network.MaidConfigurePacket;
 import studio.fantasyit.maid_useful_task.registry.GuiRegistry;
@@ -35,7 +34,7 @@ public class MaidReviveConfigGui extends MaidTaskConfigGui<MaidReviveConfigGui.C
 
         int startLeft = leftPos + 87;
         int startTop = topPos + 36;
-        this.addRenderableWidget(new MaidConfigButton(startLeft, startTop + 0,
+        this.addRenderableWidget(new MaidConfigButton(startLeft, startTop,
                 Component.translatable("gui.maid_useful_task.revive.ownerOnly"),
                 TranslateUtil.getBooleanTranslate(this.currentData.ownerOnly()),
                 button -> {

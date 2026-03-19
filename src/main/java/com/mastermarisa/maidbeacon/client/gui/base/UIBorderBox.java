@@ -14,7 +14,7 @@ public class UIBorderBox extends UIElement {
 
     @Override
     protected void render(GuiGraphics graphics, int mouseX, int mouseY) {
-        super.render(graphics,mouseX,mouseY);
+        super.render(graphics, mouseX, mouseY);
         graphics.fill(this.frame.x, this.frame.y, this.frame.x + this.frame.width, this.frame.y + 1, this.color.getRGB());
         graphics.fill(this.frame.x + 1, this.frame.y + this.frame.height, this.frame.x + this.frame.width + 1, this.frame.y + this.frame.height + 1, this.color.getRGB());
         graphics.fill(this.frame.x, this.frame.y + 1, this.frame.x + 1, this.frame.y + this.frame.height + 1, this.color.getRGB());

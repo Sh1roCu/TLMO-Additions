@@ -3,7 +3,10 @@ package com.sch246.muhc;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * 单一来源定义：动态生成 ForgeConfigSpec 与 Cloth Config 元数据。
@@ -65,6 +68,7 @@ public class Config {
         private static String labelOf(String key) {
             return TRANSLATE_ROOT + "." + key;
         }
+
         private static String tooltipOf(String key) {
             return TRANSLATE_ROOT + "." + key + ".tooltip";
         }

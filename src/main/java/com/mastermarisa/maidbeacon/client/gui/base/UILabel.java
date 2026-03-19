@@ -20,11 +20,11 @@ public class UILabel extends UIElement {
     }
 
     public UILabel(String text, TextAlignment alignment, Color color, boolean dropShadow) {
-        this(new Rectangle(font.width(text) - 1, font.lineHeight),text,alignment,color,dropShadow);
+        this(new Rectangle(font.width(text) - 1, font.lineHeight), text, alignment, color, dropShadow);
     }
 
     protected void render(GuiGraphics graphics, int mouseX, int mouseY) {
-        super.render(graphics,mouseX,mouseY);
+        super.render(graphics, mouseX, mouseY);
         int textWidth = font.width(this.text) - 1;
         int x = this.frame.x + (this.frame.width - textWidth) * this.alignment.ordinal / 2;
         int y = this.frame.y + (this.frame.height - 7) / 2;
@@ -35,14 +35,14 @@ public class UILabel extends UIElement {
         graphics.drawString(font, this.text, x, y, this.color.getRGB(), dropShadow);
     }
 
-    public static enum TextAlignment {
+    public enum TextAlignment {
         LEFT(0),
         CENTER(1),
         RIGHT(2);
 
         final int ordinal;
 
-        private TextAlignment(int ordinal) {
+        TextAlignment(int ordinal) {
             this.ordinal = ordinal;
         }
     }

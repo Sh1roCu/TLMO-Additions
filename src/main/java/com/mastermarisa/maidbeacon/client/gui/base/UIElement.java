@@ -26,7 +26,7 @@ public abstract class UIElement {
     }
 
     protected void render(GuiGraphics graphics, int mouseX, int mouseY) {
-        this.children.forEach((child) -> child.render(graphics,mouseX,mouseY));
+        this.children.forEach((child) -> child.render(graphics, mouseX, mouseY));
     }
 
     public static void render(GuiGraphics graphics, UIElement element, int mouseX, int mouseY) {
@@ -34,8 +34,8 @@ public abstract class UIElement {
     }
 
     public static void render(GuiGraphics graphics, List<? extends UIElement> elements, int mouseX, int mouseY) {
-        elements.forEach((element) -> element.render(graphics,mouseX,mouseY));
-        elements.stream().flatMap(UIElement::getRecursiveChildren).forEach((element)-> element.tryRenderTooltip(graphics, mouseX, mouseY));
+        elements.forEach((element) -> element.render(graphics, mouseX, mouseY));
+        elements.stream().flatMap(UIElement::getRecursiveChildren).forEach((element) -> element.tryRenderTooltip(graphics, mouseX, mouseY));
     }
 
     public static void renderToolTip(GuiGraphics graphics, UIElement element, int mouseX, int mouseY) {
@@ -43,40 +43,40 @@ public abstract class UIElement {
     }
 
     public static boolean onMouseClicked(UIElement element, double mouseX, double mouseY, int button) {
-        return onMouseClicked(List.of(element),mouseX,mouseY,button);
+        return onMouseClicked(List.of(element), mouseX, mouseY, button);
     }
 
     public static boolean onMouseClicked(List<? extends UIElement> elements, double mouseX, double mouseY, int button) {
-        return elements.stream().anyMatch(e -> e.onMouseClicked(mouseX,mouseY,button));
+        return elements.stream().anyMatch(e -> e.onMouseClicked(mouseX, mouseY, button));
     }
 
     public static boolean onMouseScrolled(UIElement element, double mouseX, double mouseY, double scrollX, double scrollY) {
-        return onMouseScrolled(List.of(element),mouseX,mouseY,scrollX,scrollY);
+        return onMouseScrolled(List.of(element), mouseX, mouseY, scrollX, scrollY);
     }
 
     public static boolean onMouseScrolled(List<? extends UIElement> elements, double mouseX, double mouseY, double scrollX, double scrollY) {
-        return elements.stream().anyMatch(e -> e.onMouseScrolled(mouseX,mouseY,scrollX,scrollY));
+        return elements.stream().anyMatch(e -> e.onMouseScrolled(mouseX, mouseY, scrollX, scrollY));
     }
 
     protected boolean onMouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        return this.children.stream().anyMatch(c -> c.onMouseScrolled(mouseX,mouseY,scrollX,scrollY));
+        return this.children.stream().anyMatch(c -> c.onMouseScrolled(mouseX, mouseY, scrollX, scrollY));
     }
 
     protected boolean onMouseClicked(double mouseX, double mouseY, int button) {
-        return this.children.stream().anyMatch(c -> c.onMouseClicked(mouseX,mouseY,button));
+        return this.children.stream().anyMatch(c -> c.onMouseClicked(mouseX, mouseY, button));
     }
 
-    protected void tryRenderTooltip(GuiGraphics graphics, int mouseX, int mouseY){
-        boolean hover = hasTooltip() && frame.contains(mouseX,mouseY);
-        if (hover){
-            renderTooltip(graphics, ItemStack.EMPTY,tooltip,mouseX,mouseY);
+    protected void tryRenderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+        boolean hover = hasTooltip() && frame.contains(mouseX, mouseY);
+        if (hover) {
+            renderTooltip(graphics, ItemStack.EMPTY, tooltip, mouseX, mouseY);
         }
     }
 
-    protected void tryRenderTooltip(GuiGraphics graphics, ItemStack itemStack, int mouseX, int mouseY){
-        boolean hover = hasTooltip() && frame.contains(mouseX,mouseY);
-        if (hover){
-            renderTooltip(graphics,itemStack,tooltip,mouseX,mouseY);
+    protected void tryRenderTooltip(GuiGraphics graphics, ItemStack itemStack, int mouseX, int mouseY) {
+        boolean hover = hasTooltip() && frame.contains(mouseX, mouseY);
+        if (hover) {
+            renderTooltip(graphics, itemStack, tooltip, mouseX, mouseY);
         }
     }
 
@@ -84,11 +84,11 @@ public abstract class UIElement {
         graphics.renderComponentTooltip(font, tooltip, mouseX, mouseY, itemStack);
     }
 
-    public void addChild(UIElement element){
+    public void addChild(UIElement element) {
         children.add(element);
     }
 
-    public void removeChild(UIElement element){
+    public void removeChild(UIElement element) {
         children.remove(element);
     }
 
@@ -96,7 +96,9 @@ public abstract class UIElement {
         return Stream.concat(Stream.of(this), this.children.stream().flatMap(UIElement::getRecursiveChildren));
     }
 
-    public boolean hasTooltip(){ return !this.tooltip.isEmpty();}
+    public boolean hasTooltip() {
+        return !this.tooltip.isEmpty();
+    }
 
     public final int getCenterX() {
         return this.frame.x + this.frame.width / 2;
@@ -172,8 +174,8 @@ public abstract class UIElement {
         this.setHeight(height);
     }
 
-    public static <T extends UIElement> UIElement toUIElement(T element){
-        return (UIElement) element;
+    public static <T extends UIElement> UIElement toUIElement(T element) {
+        return element;
     }
 
     static {

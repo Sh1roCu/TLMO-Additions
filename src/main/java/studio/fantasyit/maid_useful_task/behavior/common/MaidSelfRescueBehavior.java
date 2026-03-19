@@ -34,9 +34,7 @@ public class MaidSelfRescueBehavior extends Behavior<EntityMaid> {
     protected boolean checkExtraStartConditions(ServerLevel level, EntityMaid maid) {
         if (!Config.enableSelfRescue) return false;
         if (!(maid.getTask() instanceof IMaidBlockDestroyTask ibdt)) return false;
-        if (isNotSafeAndCanTryToDestroy(level, maid, maid.blockPosition(), ibdt) || isNotSafeAndCanTryToDestroy(level, maid, maid.blockPosition().above(), ibdt))
-            return true;
-        return false;
+        return isNotSafeAndCanTryToDestroy(level, maid, maid.blockPosition(), ibdt) || isNotSafeAndCanTryToDestroy(level, maid, maid.blockPosition().above(), ibdt);
     }
 
     @Override

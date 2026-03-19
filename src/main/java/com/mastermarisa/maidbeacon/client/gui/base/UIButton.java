@@ -18,7 +18,7 @@ public class UIButton extends UIElement {
 
     @Override
     public boolean onMouseClicked(double mouseX, double mouseY, int button) {
-        if (onClicked != null && frame.contains(mouseX,mouseY) && (this.button == button || this.button == -1)) {
+        if (onClicked != null && frame.contains(mouseX, mouseY) && (this.button == button || this.button == -1)) {
             onClicked.accept(this);
             return true;
         }

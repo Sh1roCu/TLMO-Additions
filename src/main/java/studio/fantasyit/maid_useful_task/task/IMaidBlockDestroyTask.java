@@ -107,10 +107,7 @@ public interface IMaidBlockDestroyTask {
      */
     default boolean canDestroyBlock(EntityMaid maid, BlockPos pos) {
         //女仆可能少走一格，所以判断时给予补偿
-        if (maid.distanceToSqr(pos.getCenter()) > Math.pow(reachDistance() + 1, 2)) {
-            return false;
-        }
-        return true;
+        return !(maid.distanceToSqr(pos.getCenter()) > Math.pow(reachDistance() + 1, 2));
     }
 
     /**

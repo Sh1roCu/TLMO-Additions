@@ -89,9 +89,7 @@ public class MaidUtils {
         InteractionResult actionresult = fakePlayer.getMainHandItem().useOn(useContext);
         if (actionresult == InteractionResult.PASS) {
             InteractionResult interactionResult = fakePlayer.getMainHandItem().useOn(useContext);
-            if (interactionResult.consumesAction()) {
-                return true;
-            }
+            return interactionResult.consumesAction();
         }
         return false;
     }

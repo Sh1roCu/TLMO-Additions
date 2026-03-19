@@ -1,7 +1,10 @@
 package cn.sh1rocu.tlmo_additions.client;
 
 import cn.sh1rocu.touhoulittlemaid.api.event.KeyInputCallback;
-import com.github.touhoumaidaffection.client.*;
+import com.github.touhoumaidaffection.client.KissFovHandler;
+import com.github.touhoumaidaffection.client.KissKeyInputHandler;
+import com.github.touhoumaidaffection.client.KissKeyRegisterHandler;
+import com.github.touhoumaidaffection.client.KissParticleEffectManager;
 import com.github.touhoumaidaffection.network.KissMaidPayload;
 import com.mastermarisa.maidbeacon.client.event.OnClientSetup;
 import io.github.fabricators_of_create.porting_lib.event.client.CameraSetupCallback;

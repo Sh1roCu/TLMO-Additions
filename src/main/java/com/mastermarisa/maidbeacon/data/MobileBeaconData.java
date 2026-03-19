@@ -7,7 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
@@ -83,7 +82,7 @@ public class MobileBeaconData {
     }
 
     public static void setData(ItemStack itemStack, MobileBeaconData mobileBeaconData) {
-        itemStack.getOrCreateTag().put("mobile_beacon_data",  mobileBeaconData.serializeNBT());
+        itemStack.getOrCreateTag().put("mobile_beacon_data", mobileBeaconData.serializeNBT());
     }
 
 }

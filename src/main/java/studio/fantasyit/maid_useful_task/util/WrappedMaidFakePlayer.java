@@ -48,7 +48,7 @@ public class WrappedMaidFakePlayer extends FakePlayer {
         }
     }
 
-    private static ConcurrentHashMap<UUID, WrappedMaidFakePlayer> cache = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<UUID, WrappedMaidFakePlayer> cache = new ConcurrentHashMap<>();
     private final EntityMaid maid;
 
     public static WrappedMaidFakePlayer get(EntityMaid maid) {
