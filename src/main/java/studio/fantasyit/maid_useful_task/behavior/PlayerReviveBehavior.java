@@ -1,0 +1,197 @@
+package studio.fantasyit.maid_useful_task.behavior;
+
+import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.goal.target.TargetGoal;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
+
+import java.util.Map;
+
+// TODO: wait for Fabric port of PlayerRevive
+public class PlayerReviveBehavior extends Behavior<EntityMaid> {
+    protected static class TryAttackMaidGoal extends TargetGoal {
+        private final EntityMaid maid;
+
+        public TryAttackMaidGoal(Mob p_26140_, EntityMaid maid) {
+            super(p_26140_, true);
+            this.maid = maid;
+        }
+
+        @Override
+        public boolean canUse() {
+            return mob.canAttack(maid);
+        }
+
+        @Override
+        public void start() {
+            mob.setTarget(maid);
+            super.start();
+        }
+
+        public boolean isMaid(EntityMaid maid) {
+            return maid.getUUID().equals(this.maid.getUUID());
+        }
+    }
+
+    public PlayerReviveBehavior() {
+        super(Map.of(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT), 600);
+    }
+
+//    @Override
+//    protected boolean checkExtraStartConditions(ServerLevel level, EntityMaid maid) {
+//        if (!maid.getTask().getUid().equals(MaidRevivePlayerTask.UID)) {
+//            // 如果来自被动行为，那么确保不打断现有的巡路逻辑
+//            if (MemoryUtil.getTargetPos(maid) != null || maid.getBrain().hasMemoryValue(MemoryModuleType.WALK_TARGET))
+//                return false;
+//        }
+//
+//        if (!itemConsumeCheck(maid, true))
+//            return false;
+//        MaidPathFindingBFS pathFindingBFS = new MaidPathFindingBFS(maid.getNavigation().getNodeEvaluator(), level, maid);
+//        Optional<NearestVisibleLivingEntities> memory = maid.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
+//        return memory.map(list -> list
+//                .find(entity -> entity instanceof Player)
+//                .filter(ep -> MaidReviveGlobalData.checkRescuingMaid(ep.getUUID(), maid, level))
+//                .anyMatch(ep -> PlayerReviveServer.getBleeding((ServerPlayer) ep).isBleeding() && pathFindingBFS.canPathReach(ep.blockPosition()))
+//        ).orElse(false);
+//    }
+//
+//    ServerPlayer targetPlayer;
+//    IBleeding bleeding;
+//    boolean startedRevive;
+//    Set<UUID> aggroEntities;
+//
+//    protected boolean itemConsumeCheck(EntityMaid maid, boolean simulate) {
+//        if (!PlayerRevive.CONFIG.revive.needReviveItem)
+//            return true;
+//
+//        ItemStack extractedForConsume = InvUtil.tryExtractOneMatches(maid.getAvailableInv(true), PlayerRevive.CONFIG.revive.reviveItem::is, simulate);
+//        return PlayerRevive.CONFIG.revive.reviveItem.is(extractedForConsume);
+//    }
+//
+//    @Override
+//    protected void start(ServerLevel level, EntityMaid maid, long p_22542_) {
+//        super.start(level, maid, p_22542_);
+//        aggroEntities = new HashSet<>();
+//        startedRevive = false;
+//        targetPlayer = null;
+//        boolean ownerOnly;
+//        if (maid.getTask().getUid().equals(MaidRevivePlayerTask.UID))
+//            ownerOnly = maid.getOrCreateData(MaidReviveConfig.KEY, MaidReviveConfig.Data.getDefault()).ownerOnly();
+//        else {
+//            ownerOnly = false;
+//        }
+//        LivingEntity owner = maid.getOwner();
+//        Optional<NearestVisibleLivingEntities> memory = maid.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
+//        if (!itemConsumeCheck(maid, true))
+//            return;
+//        MaidPathFindingBFS pathFindingBFS = new MaidPathFindingBFS(maid.getNavigation().getNodeEvaluator(), level, maid);
+//        targetPlayer = memory.flatMap(list -> list
+//                .find(entity -> entity instanceof Player)
+//                .map(ep -> (ServerPlayer) ep)
+//                .filter(sp -> MaidReviveGlobalData.checkRescuingMaid(sp.getUUID(), maid, (ServerLevel) sp.level()))
+//                .filter(sp -> (owner != null && sp.is(owner)) || !ownerOnly)
+//                .filter(ep -> PlayerReviveServer.getBleeding(ep).isBleeding())
+//                .filter(ep -> pathFindingBFS.canPathReach(ep.blockPosition()))
+//                .findFirst()
+//        ).orElse(null);
+//        if (targetPlayer != null) {
+//            bleeding = PlayerReviveServer.getBleeding(targetPlayer);
+//            MemoryUtil.setTargetEntity(maid, targetPlayer, 0.5f);
+//            MaidReviveGlobalData.setRescuingMaid(targetPlayer.getUUID(), maid.getUUID());
+//        }
+//        useTotemOfUndying(level, maid);
+//    }
+//
+//    private void useTotemOfUndying(ServerLevel level, EntityMaid maid) {
+//        if (!Config.enableReviveTotem) return;
+//        ItemStack itemstack = InvUtil.tryExtractOneMatches(maid.getMaidBauble(), (stack) -> stack.is(Items.TOTEM_OF_UNDYING));
+//        if (!itemstack.isEmpty()) {
+//            targetPlayer.awardStat(Stats.ITEM_USED.get(Items.TOTEM_OF_UNDYING), 1);
+//            CriteriaTriggers.USED_TOTEM.trigger(targetPlayer, itemstack);
+//
+//            targetPlayer.setHealth(1.0F);
+//            targetPlayer.removeAllEffects();
+//            targetPlayer.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
+//            targetPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
+//            targetPlayer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
+//            level.broadcastEntityEvent(targetPlayer, (byte) 35);
+//
+//            PlayerReviveServer.revive(targetPlayer);
+//        }
+//    }
+//
+//    private void checkCanReviveAndStartRevive(ServerLevel level, EntityMaid maid) {
+//        if (PlayerRevive.CONFIG.revive.needReviveItem) {
+//            if (PlayerRevive.CONFIG.revive.consumeReviveItem && !bleeding.isItemConsumed()) {
+//                if (!itemConsumeCheck(maid, false)) {
+//                    targetPlayer = null;
+//                    return;
+//                }
+//
+//                bleeding.setItemConsumed();
+//            }
+//        }
+//
+//        PlayerReviveServer.removePlayerAsHelper(WrappedMaidFakePlayer.get(maid));
+//        MaidReviveGlobalData.startRescue(targetPlayer.getUUID());
+//        bleeding.revivingPlayers().add(WrappedMaidFakePlayer.get(maid));
+//        aggroEntitiesAround(level, maid);
+//    }
+//
+//    @Override
+//    protected boolean canStillUse(ServerLevel p_22545_, EntityMaid maid, long p_22547_) {
+//        if (targetPlayer == null) return false;
+//        if (startedRevive && targetPlayer.distanceTo(maid) > PlayerRevive.CONFIG.revive.maxDistance) return false;
+//        return bleeding.isBleeding();
+//    }
+//
+//    protected void aggroEntitiesAround(ServerLevel level, EntityMaid maid) {
+//        if (!Config.enableReviveAggro) return;
+//        List<Monster> entities = level.getEntities(EntityTypeTest.forClass(Monster.class),
+//                AABB.ofSize(maid.position(), 16, 16, 16),
+//                entity -> true
+//        );
+//        for (Monster entity : entities) {
+//            if (!aggroEntities.contains(entity.getUUID())) {
+//                entity.targetSelector.addGoal(10, new TryAttackMaidGoal(entity, maid));
+//                aggroEntities.add(entity.getUUID());
+//            }
+//        }
+//    }
+//
+//    @Override
+//    protected void tick(ServerLevel level, EntityMaid maid, long p_22553_) {
+//        super.tick(level, maid, p_22553_);
+//        if (p_22553_ % 20 == 0)
+//            BehaviorUtils.setWalkAndLookTargetMemories(maid, targetPlayer, 0.5f, 2);
+//        if (!startedRevive) {
+//            if (MaidReviveGlobalData.isBeingRescueByOtherMaid(targetPlayer.getUUID(), maid.getUUID())) {
+//                targetPlayer = null;
+//                return;
+//            }
+//            if (maid.distanceTo(targetPlayer) < PlayerRevive.CONFIG.revive.maxDistance) {
+//                checkCanReviveAndStartRevive(level, maid);
+//                startedRevive = true;
+//            }
+//        } else {
+//            if (p_22553_ % 20 == 0)
+//                aggroEntitiesAround(level, maid);
+//        }
+//    }
+//
+//    @Override
+//    protected void stop(ServerLevel p_22548_, EntityMaid maid, long p_22550_) {
+//        if (targetPlayer != null)
+//            MaidReviveGlobalData.clearRescuingMaid(targetPlayer.getUUID());
+//        MemoryUtil.clearTarget(maid);
+//        PlayerReviveServer.removePlayerAsHelper(WrappedMaidFakePlayer.get(maid));
+//        for (UUID uuid : aggroEntities) {
+//            Entity entity = p_22548_.getEntity(uuid);
+//            if (entity instanceof Monster monster && entity.isAlive())
+//                monster.targetSelector.removeAllGoals(g -> g instanceof TryAttackMaidGoal tg && tg.isMaid(maid));
+//        }
+//    }
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.github.touhoumaidaffection.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "tlmo_additions.refmap.json",
+  "minVersion": "0.8",
+  "mixins": [
+    "MaidBegTaskMixin",
+    "MaidRideBegTaskMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cn.sh1rocu.tlmo_additions.mixin",
+  "plugin": "cn.sh1rocu.tlmo_additions.mixin.MixinPlugin",
+  "refmap": "tlmo_additions.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "common.PlayerListMixin",
+    "common.ServerLevelMixin",
+    "common.ServerLevelMixin$EntityCallbacksMixin"
+  ],
+  "client": [
+    "client.AbstractPlayerMixin",
+    "client.CameraMixin",
+    "client.ClientLevelMixin",
+    "client.ClientLevelMixin$EntityCallbacksMixin",
+    "client.GameRendererMixin",
+    "client.GuiGraphicsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.mastermarisa.maidbeacon.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "tlmo_additions.refmap.json",
+  "mixins": [
+    "SaddleMaidEventMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
