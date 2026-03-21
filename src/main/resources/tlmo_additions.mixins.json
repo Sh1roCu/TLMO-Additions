@@ -8,7 +8,9 @@
   "mixins": [
     "common.PlayerListMixin",
     "common.ServerLevelMixin",
-    "common.ServerLevelMixin$EntityCallbacksMixin"
+    "common.ServerLevelMixin$EntityCallbacksMixin",
+    "compat.forgeconfigapiport.ForgeConfigRegistryImplMixin",
+    "compat.forgeconfigapiport.accessor.ModConfigAccessor"
   ],
   "client": [
     "client.ClientLevelMixin",
