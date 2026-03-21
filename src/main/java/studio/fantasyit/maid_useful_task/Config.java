@@ -53,20 +53,20 @@ public class Config {
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
-    public static boolean enableSelfRescue = SELF_RESCUE.get();
+    public static boolean enableSelfRescue = false;
 
-    public static boolean enableLoggingTask = ENABLE_LOGGING.get();
-    public static boolean enableReviveTask = ENABLE_REVIVE.get();
-    public static boolean enableLocateTask = ENABLE_LOCATE.get();
+    public static boolean enableLoggingTask = false;
+    public static boolean enableReviveTask = false;
+    public static boolean enableLocateTask = false;
 
-    public static boolean enableReviveAggro = ENABLE_REVIVE_AGGRO.get();
-    public static boolean enableReviveTotem = ENABLE_REVIVE_TOTEM.get();
-    public static boolean enableRevivePassive = ENABLE_REVIVE_PASSIVE.get();
+    public static boolean enableReviveAggro = false;
+    public static boolean enableReviveTotem = false;
+    public static boolean enableRevivePassive = false;
 
-    public static boolean enableVehicleControlFull = ENABLE_VEHICLE_CONTROL_FULL.get();
-    public static boolean enableVehicleControlRotate = ENABLE_VEHICLE_CONTROL_ROTATE.get();
+    public static boolean enableVehicleControlFull = false;
+    public static boolean enableVehicleControlRotate = false;
 
-    public static boolean disableLoggingBlockUp = LOGGING_DISABLE_BLOCKUP.get();
+    public static boolean disableLoggingBlockUp = false;
 
     public static HashMap<ResourceLocation, Integer> passiveReviveJobPriority = new HashMap<>();
 
