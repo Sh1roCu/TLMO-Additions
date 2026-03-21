@@ -147,6 +147,10 @@ dependencies {
 
     // TODO: wait official Create-Fabric-1.21
     // modImplementation("com.simibubi.create:create-fabric")
+
+    // 不加就无法run的各种前置
+    modImplementation "libs:LibGui:11.1.0+1.21"
+    modImplementation "libs:Jankson-Fabric:8.0.0+j1.2.3"
 }
 
 processResources {
