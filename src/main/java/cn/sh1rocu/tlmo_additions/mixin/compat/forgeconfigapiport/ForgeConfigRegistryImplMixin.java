@@ -19,7 +19,7 @@ public class ForgeConfigRegistryImplMixin {
     @WrapMethod(method = "register(Ljava/lang/String;Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;)Lnet/minecraftforge/fml/config/ModConfig;")
     private ModConfig tlmoa$compatKilt(String modId, ModConfig.Type type, IConfigSpec<?> spec, Operation<ModConfig> original) {
         ModConfig config = original.call(modId, type, spec);
-        if (FabricLoader.getInstance().isModLoaded("kilt")) {
+        if (FabricLoader.getInstance().isModLoaded("kilt") && !FabricLoader.getInstance().isModLoaded("kilt_fc_fix")) {
             tlmoa$loadTrackedConfig(config);
         }
         return config;
@@ -28,7 +28,7 @@ public class ForgeConfigRegistryImplMixin {
     @WrapMethod(method = "register(Ljava/lang/String;Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;Ljava/lang/String;)Lnet/minecraftforge/fml/config/ModConfig;")
     private ModConfig tlmoa$compatKilt(String modId, ModConfig.Type type, IConfigSpec<?> spec, String fileName, Operation<ModConfig> original) {
         ModConfig config = original.call(modId, type, spec, fileName);
-        if (FabricLoader.getInstance().isModLoaded("kilt")) {
+        if (FabricLoader.getInstance().isModLoaded("kilt") && !FabricLoader.getInstance().isModLoaded("kilt_fc_fix")) {
             tlmoa$loadTrackedConfig(config);
         }
         return config;
