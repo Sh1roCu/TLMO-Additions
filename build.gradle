@@ -136,6 +136,7 @@ dependencies {
     }
 
     modImplementation "com.simibubi.create:create-fabric:6.0.8.1+build.1744-mc1.20.1"
+    modImplementation "curse.maven:create-connected-fabric-1005193:7781316"
 }
 
 processResources {
