@@ -12,6 +12,9 @@ import net.fabricmc.loader.api.FabricLoader;
 public class LittleMaidCompat implements ILittleMaid {
     // 默认构造函数，女仆模组会在合适的时间调用这个构造函数。可以在这里注册女仆专属的事件
     public LittleMaidCompat() {
+        if (!FabricLoader.getInstance().isModLoaded("create"))
+            return;
+
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT &&
                 FabricLoader.getInstance().isModLoaded("cloth-config")) {
             AddClothConfigEvent.CALLBACK.register(ClothConfigEvent::onEvent);
