@@ -102,11 +102,12 @@ repositories {
         url = 'https://maven.greenhouse.lgbt/releases/'
     }
     maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
+        name = "AlexIIL"
+        url = "https://staging.alexiil.uk/maven/"
     }
     maven {
-        url "https://alexiil.uk/mirrors/server.bbkr.space/maven/"
+        name "wispForestReleases"
+        url "https://maven.wispforest.io/releases"
     }
 }
 
@@ -120,7 +121,7 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation("cn.sh1rocu:touhoulittlemaid-fabric-1.20.1:0.6.4-forge1.5.0") {
+    modImplementation("cn.sh1rocu:touhoulittlemaid-fabric:0.8.2-forge1.5.3+mc1.20.1") {
         exclude(group: "libs")
         exclude(group: "net.conczin")
     }
