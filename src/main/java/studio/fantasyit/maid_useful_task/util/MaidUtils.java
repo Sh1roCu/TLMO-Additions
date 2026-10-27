@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 public class MaidUtils {
     public static void swapToHand(EntityMaid maid, Predicate<ItemStack> isSuitable) {
-        RangedWrapper availableBackpackInv = maid.getAvailableBackpackInv();
+        var availableBackpackInv = maid.getAvailableBackpackInv();
         for (int i = 0; i < availableBackpackInv.getSlots(); i++) {
             ItemStack itemStack = availableBackpackInv.getStackInSlot(i);
             if (isSuitable.test(itemStack)) {
