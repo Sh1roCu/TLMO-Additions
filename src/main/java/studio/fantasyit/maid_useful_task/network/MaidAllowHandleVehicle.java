@@ -25,9 +25,9 @@ public class MaidAllowHandleVehicle {
     }
 
     public static void handle(MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl handler, FriendlyByteBuf buf, PacketSender responseSender) {
+        int maidId = buf.readInt();
+        Entity entity = player.level().getEntity(maidId);
         server.execute(() -> {
-            int maidId = buf.readInt();
-            Entity entity = player.level().getEntity(maidId);
             if (entity instanceof EntityMaid maid) {
                 MaidVehicleControlType[] values = MaidVehicleControlType.values();
                 MaidVehicleControlType allowMode = values[(MemoryUtil.getAllowHandleVehicle(maid).ordinal() + 1) % values.length];
